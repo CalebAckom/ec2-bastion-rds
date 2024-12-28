@@ -30,19 +30,23 @@ jobs:
           terraform init
 
       - name: Validate Backend Resources
-        run: terraform validate
+        run: |
+          cd init/
+          terraform validate
 
       - name: Plan Backend Resources
-        run: terraform plan
+        run: |
+          cd init/
+          terraform plan
         continue-on-error: true
 
       - name: Apply Backend Resources
-        run: terraform apply -auto-approve
+        run: |
+          cd init/
+          terraform apply -auto-approve
 
       - name: Init Resources
-        run: |
-          cd ..
-          terraform init
+        run: terraform init
 
       - name: Validate Resources
         run: terraform validate
