@@ -57,3 +57,9 @@ jobs:
 
       - name: Apply Resources
         run: terraform apply -auto-approve
+
+      - name: Destroy Resources after 60 seconds of creation
+        run: |
+          terraform destroy -auto-approve
+          cd init/
+          terraform destroy -auto-approve
