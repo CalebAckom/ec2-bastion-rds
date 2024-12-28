@@ -3,7 +3,7 @@ name: Provision Infrastructure
 on:
   push:
     branches:
-      - ci/cd
+      - main
 
 jobs:
   configure-and-provision:
@@ -60,6 +60,7 @@ jobs:
 
       - name: Destroy Resources after 60 seconds of creation
         run: |
+          sleep 60
           terraform destroy -auto-approve
           cd init/
           terraform destroy -auto-approve
