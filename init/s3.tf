@@ -1,7 +1,3 @@
-data "aws_s3_bucket" "existing_bucket" {
-  bucket = var.s3_bucket_name
-}
-
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.s3_bucket_name
   force_destroy = true
@@ -9,8 +5,6 @@ resource "aws_s3_bucket" "terraform_state" {
   tags = {
     Name = "bastion-test-s3"
   }
-
-  depends_on = [data.aws_s3_bucket.existing_bucket]
 }
 
 resource "aws_s3_bucket_versioning" "terraform_state_versioning" {
