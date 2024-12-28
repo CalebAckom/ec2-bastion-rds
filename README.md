@@ -27,3 +27,67 @@ This architecture consists of the following components:
 3. **IAM User/Role Permissions**:
    - Access to create VPC, subnets, EC2, RDS, S3, DynamoDB, and route tables.
    - Permissions for the S3 bucket and DynamoDB table (for state storage and locking).
+
+## Usage
+1. Clone the Repository
+```shell
+git clone https://github.com/CalebAckom/ec2-bastion-rds.git
+```
+
+2. Provision Backend resource
+- Change Directory
+```shell
+cd init
+```
+- Initialize Terraform
+```shell
+terraform init
+```
+- Plan Infrastructure
+
+This is used to review the changes Terraform will apply
+```shell
+terraform plan
+```
+- Apply Changes
+
+This will provision the infrastructure
+```shell
+terraform apply
+```
+
+3. Provision other Infrastructure
+
+In the same terminal, run:
+```shell
+cd ..
+```
+
+Repeat the process for ```init```, ```plan```, and ``apply```.
+
+4. View Outputs
+
+After applying, view the created resources:
+```shell
+terraform output
+```
+
+## Resources Created
+1. VPC
+   - CIDR Block: 10.0.0.0/16
+2. Subnets
+   - Public Subnet: 10.0.1.0/24
+   - Private Subnet A: 10.0.16.0/24
+   - Private Subnet B: 10.0.32.0/24
+3. Route Table
+4. Internet Gateway
+5. EC2 Instance
+6. RDS Database
+7. S3 Bucket: Used for storing the Terraform state file
+8. DynamoDB Table: Used for state locking
+
+## Clean Up
+To destroy the infrastructure:
+```shell
+terraform destroy
+```
