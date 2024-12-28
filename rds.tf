@@ -10,7 +10,6 @@ resource "aws_db_instance" "database" {
   db_subnet_group_name = aws_db_subnet_group.db_subnet_group.id
   skip_final_snapshot = true
   identifier = "bastion-rds"
-  performance_insights_enabled = true
 
   tags = {
     Name = "bastion-test-rds"
