@@ -1,9 +1,7 @@
 name: Provision Infrastructure
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call
 
 jobs:
   configure-and-provision:
@@ -24,27 +22,6 @@ jobs:
       - name: Terraform CLI
         uses: hashicorp/setup-terraform@v3
 
-      - name: Init Backend Resources
-        run: |
-          cd init/
-          terraform init
-
-      - name: Validate Backend Resources
-        run: |
-          cd init/
-          terraform validate
-
-      - name: Plan Backend Resources
-        run: |
-          cd init/
-          terraform plan
-        continue-on-error: true
-
-      - name: Apply Backend Resources
-        run: |
-          cd init/
-          terraform apply -auto-approve
-
       - name: Init Resources
         run: terraform init
 
@@ -61,6 +38,4 @@ jobs:
       - name: Destroy Resources after 60 seconds of creation
         run: |
           sleep 60
-          terraform destroy -auto-approve
-          cd init/
           terraform destroy -auto-approve
